@@ -1,0 +1,31 @@
+<ion-view title="register" hide-nav-bar="true">
+    <ion-content padding="true" class="manual-ios-statusbar-padding">
+        <div>
+            <img src="img/logo.png" class="logoImg">
+        </div>
+        <h4  class="text-center">Welcom To Doctor App !</h4>
+        <div class="spacer2"></div>
+        <form name="frmRegister" ng-submit="submitForm(frmRegister)">
+            <ion-list class="list listInputs padding">
+                <label class="item item-input padding">
+                    <span class="input-label spnValidationPadding">Email</span>
+                    <input ng-model="name" type="email" required placeholder="Email" name="userName" id="userName" autocorrect="off" autocapitalize="off">
+                    <span ng-show="frmRegister.userName.$touched  && frmRegister.userName.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmRegister.userName.$error.required">required</span>
+                        <span class="errorFont" ng-show="frmRegister.userName.$error.email">invalid email</span>
+                    </span>
+                </label>
+                <label class="item item-input padding">
+                    <span class="input-label spnValidationPadding">Password</span>
+                    <input ng-model="password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
+                    <span ng-show="frmRegister.txtPassword.$touched && frmRegister.txtPassword.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmRegister.txtPassword.$error.required">required</span>
+                    </span>
+                </label>
+            </ion-list>
+            <button class="button button-calm actionBlue button-block" ng-disabled="frmRegister.$invalid" type="submit"><span>&nbsp;Register</span></button>
+        </form>
+        <a ui-sref="dashboard" class="button button-positive ion-social-facebook button-block"><span>&nbsp;Use Facebook</span></a>
+        <div class="spacer2"></div>
+    </ion-content>
+</ion-view>

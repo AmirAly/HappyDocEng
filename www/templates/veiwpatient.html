@@ -1,0 +1,158 @@
+<ion-view title="" hide-back-button="false" id="page6" class="viewPatientPage">
+    <ion-content padding="true" class="has-header has-footer">
+
+
+        <div class="row">
+            <div class="col col-75">
+                <div class="list dvUserData">
+                    <div class="item item-avatar item-borderless">
+                        <img src="img/unknown.png">
+                        <h2>Ali Saad</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-25 text-right col-center">
+                <span ng-click="showDeleteConfirmation()" class="button-icon assertive icon ion-android-cancel"></span>
+            </div>
+        </div>
+
+        <div class="button-bar">
+            <button id="veiwPatient-button14" class="button button-positive  button-block icon ion-medkit"></button>
+            <button id="veiwPatient-button15" class="button button-calm  button-block icon ion-radio-waves"></button>
+            <button id="veiwPatient-button16" class="button button-balanced  button-block icon ion-thermometer"></button>
+            <button id="veiwPatient-button17" class="button button-royal  button-block icon ion-clipboard"></button>
+        </div>
+
+        <div class="padding">
+            <div id="card1" ng-click="flip(1)" class="flip-container ">
+                <div class="flipper clearfix">
+                    <div class="front card item-text-wrapped">
+                        <div class="padding">
+                            <h4 class="text-left">blood pressure range</h4>
+                            <div>
+                                <p>
+                                    <span class="pull-left">medical</span>
+                                    <span class="pull-right">1/1/2016</span>
+                                </p>
+                            </div>
+                            <div class="spacer2"></div>
+                        </div>
+                    </div>
+                    <div class="back card item-text-wrapped success">
+                        <div class="row padding">
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-edit positive" ng-click="newPost()"></button>
+                            </div>
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-close-round assertive" ng-click="showDeleteCardConfirmation()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer1"></div>
+            <div id="card2" ng-click="flip(2)" class="flip-container">
+                <div class="flipper clearfix">
+                    <div class="front card item-text-wrapped">
+                        <div class="padding">
+                            <h4 class="text-left">blood sugar level</h4>
+                            <div>
+                                <p>
+                                    <span class="pull-left">medical</span>
+                                    <span class="pull-right">1/1/2016</span>
+                                </p>
+                            </div>
+                            <div class="spacer2"></div>
+                        </div>
+                    </div>
+                    <div class="back card item-text-wrapped success">
+                        <div class="row padding">
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-edit positive" ng-click="newPost()"></button>
+                            </div>
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-close-round assertive" ng-click="showDeleteCardConfirmation()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer1"></div>
+            <div id="card3" ng-click="flip(3)" class="flip-container ">
+                <div class="flipper clearfix">
+                    <div class="front card item-text-wrapped">
+                        <div class="padding">
+                            <h4 class="text-left">heart rate</h4>
+                            <div>
+                                <p>
+                                    <span class="pull-left">medical</span>
+                                    <span class="pull-right">1/1/2016</span>
+                                </p>
+                            </div>
+                            <div class="spacer2"></div>
+                        </div>
+                    </div>
+                    <div class="back card item-text-wrapped success">
+                        <div class="row padding">
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-edit positive" ng-click="newPost()"></button>
+                            </div>
+                            <div class="col col-50">
+                                <button class="button button-icon icon ion-close-round assertive" ng-click="showDeleteCardConfirmation()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer1"></div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-positive">
+
+        <div class="button-bar">
+            <button ui-sref="patient" class="button button-royal icon ion-ios-paper-outline"><span>&nbsp;Edit</span></button>
+            <button class="button button-positive icon ion-ios-compose" ng-click="newPost()"><span>&nbsp;Post</span></button>
+        </div>
+
+    </ion-footer-bar>
+</ion-view>
+
+<script id="postPopupModal.html" type="text/ng-template">
+    <ion-modal-view class="postPopupModal">
+        <ion-header-bar class="bar bar-calm">
+            <h1 class="title light"><i class="ion-information-circled"></i>&nbsp;Post<i ng-click="hideModal()" class="ion-close-round closeIcon"></i></h1>
+        </ion-header-bar>
+        <form name="frmPost" ng-submit="submitForm(frmPost)">
+            <div class="content has-header has-footer">
+                <div class="padding">
+                    <div class="button-bar">
+                        <button type="button" class="button button-positive button-block icon ion-medkit"></button>
+                        <button type="button" class="button button-calm button-block icon ion-radio-waves"></button>
+                        <button type="button" class="button button-balanced button-block icon ion-thermometer"></button>
+                        <button type="button" class="button button-royal button-block icon ion-clipboard"></button>
+                    </div>
+                    <div class="spacer3"></div>
+                    <label class="item item-input">
+                        <textarea ng-model="postTxt" type="text" required rows="3" placeholder="Your Post here" name="txtPost" id="txtPost"></textarea>
+                    </label>
+                    <div class="spacer3"></div>
+                    <span ng-show="frmPost.txtPost.$touched && frmPost.txtPost.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmPost.txtPost.$error.required">required</span>
+                    </span>
+                    <button class="button button-icon icon ion-android-attach pull-right attachmentIcon"></button>
+                </div>
+            </div>
+            <div class="bar bar-footer bar-stable">
+                <button class="button button-light" type="reset" ng-click="hideModal()">
+                    <span>Cancel</span>
+                </button>
+
+                <button class="button button-positive" type="submit" ng-disabled="frmPost.$invalid">
+                    <span>Save</span>
+                </button>
+            </div>
+        </form>
+
+
+    </ion-modal-view>
+</script>

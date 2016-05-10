@@ -1,0 +1,55 @@
+<ion-view title="" hide-back-button="true">
+    <form name="frmPatient" ng-submit="submitForm(frmPatient)">
+        <ion-content  overflow-scroll="true" padding="true">
+            <div>
+                <img src="img/unknown.png" class="circle">
+            </div>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label spnValidationPadding">Name</span>
+                    <input type="text" placeholder="Patient Name" name="txtName" required ng-model="name">
+                    <span ng-show="frmPatient.txtName.$touched && frmPatient.txtName.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmPatient.txtName.$error.required">required</span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label spnValidationPadding">Phone</span>
+                    <input type="text" placeholder="Patient Phone" name="txtPhone" required ng-model="phone">
+                    <span ng-show="frmPatient.txtPhone.$touched && frmPatient.txtPhone.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmPatient.txtPhone.$error.required">required</span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label spnValidationPadding">Dob</span>
+                    <input type="date" placeholder="Date of birth" name="txtDob" required ng-model="dob">
+                    <span ng-show="frmPatient.txtDob.$touched && frmPatient.txtDob.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmPatient.txtDob.$error.required">required</span>
+                    </span>
+                </label>
+
+                <label class="item">
+                    <div class="button-bar">
+                        <button type="button" class="button" ng-class="{'button-positive': isActive(0)}" ng-click="setActive(0)">Male</button>
+                        <button type="button" class="button" ng-class="{'button-positive': isActive(1)}" ng-click="setActive(1)">Female</button>
+                    </div>
+                </label>
+                <!--<ion-toggle toggle-class="toggle-positive" ng-checked="true">Male</ion-toggle>-->
+                <label class="item item-input">
+                    <span class="input-label spnValidationPadding col-top">Bio</span>
+                    <textarea type="text" placeholder="Bio" rows="5" name="txtBio" required ng-model="bio"></textarea>
+                    <span ng-show="frmPatient.txtBio.$touched && frmPatient.txtBio.$invalid" class="errorMsgContainer">
+                        <span class="errorFont" ng-show="frmPatient.txtBio.$error.required">required</span>
+                    </span>
+                </label>
+            </div>
+            <div class="spacer1"></div>
+        </ion-content>
+            <ion-footer-bar class="bar bar-footer bar-positive">
+                <div class="button-bar">
+                    <button class="button button-stable icon ion-close-round" ui-sref="allPatients" type="button"><span>&nbsp;Cancel</span></button>
+                    <button class="button button-positive icon ion-checkmark-round" type="submit" ng-disabled="frmPatient.$invalid"><span>&nbsp;Save</span></button>
+                </div>
+            </ion-footer-bar>
+</form>
+    
+</ion-view>

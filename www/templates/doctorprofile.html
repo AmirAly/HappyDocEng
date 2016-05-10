@@ -1,0 +1,57 @@
+<ion-view title="" hide-back-button="true" id="page8">
+    <ion-content padding="true" class="has-header has-footer">
+
+        <div>
+            <img src="img/unknown.png" class="circle">
+        </div>
+        <form class="list" name="frmDrData" ng-submit="submitFormData(frmDrData)">
+            <label class="item item-input" >
+                <span class="input-label spnValidationPadding">Name</span>
+                <input type="text" placeholder="Name" name="txtName" required ng-model="name">
+                <span ng-show="frmDrData.txtName.$touched && frmDrData.txtName.$invalid" class="errorMsgContainer">
+                    <span class="errorFont" ng-show="frmDrData.txtName.$error.required">required</span>
+                </span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label spnValidationPadding">Email</span>
+                <input type="email" placeholder="Email" name="txtEmail" required ng-model="email">
+                <span ng-show="frmDrData.txtEmail.$touched  && frmDrData.txtEmail.$invalid" class="errorMsgContainer">
+                    <span class="errorFont" ng-show="frmDrData.txtEmail.$error.required">required</span>
+                    <span class="errorFont" ng-show="frmDrData.txtEmail.$error.email">invalid email</span>
+                </span>
+            </label>
+            <label class="item item-input">
+                <span class="input-label spnValidationPadding">Password</span>
+                <input type="password" placeholder="Password" name="txtPassword" required ng-model="password">
+                <span ng-show="frmDrData.txtPassword.$touched && frmDrData.txtPassword.$invalid" class="errorMsgContainer">
+                    <span class="errorFont" ng-show="frmDrData.txtPassword.$error.required">required</span>
+                </span>
+            </label>
+            <div class="spacer3"></div>
+            <button class="button button-positive pull-right" ng-disabled="frmDrData.$invalid" type="submit">Update</button>
+        </form>
+
+        <div class="spacer1"></div>
+        <form class="list" name="frmPhoneNumber" ng-submit="submitFormPhone(frmPhoneNumber)">
+
+            <label class="item item-input" >
+                <span class="input-label spnValidationPadding">Phone</span>
+                <input type="text" placeholder="Phone" name="txtPhone" required ng-model="phoneNumber">
+                <span ng-show="frmPhoneNumber.txtPhone.$touched && frmPhoneNumber.txtPhone.$invalid" class="errorMsgContainer">
+                    <span class="errorFont" ng-show="frmPhoneNumber.txtPhone.$error.required">required</span>
+                </span>
+            </label>
+            <div class="spacer3"></div>
+            <button class="button button-positive pull-right" type="submit" ng-disabled="frmPhoneNumber.$invalid" ng-click="action()">Confirm</button>
+        </form>
+        <div class="spacer3"></div>
+    </ion-content>
+
+    <ion-footer-bar class="bar-positive">
+        <div class="button-bar">
+            <button ui-sref="dashboard" class="button button-clear button-icon ion-close-round">
+                <span>&nbsp;Cancel</span>
+            </button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

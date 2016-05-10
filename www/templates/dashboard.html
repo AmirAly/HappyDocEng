@@ -1,0 +1,72 @@
+<ion-view title="" hide-back-button="true" class="dashboardPage">
+
+    <ion-content padding="true" class="has-header">
+        <a ui-sref="allPatients" class="button button-stable button-block buttonGray">View Patients</a>
+        
+        <!--gauges-->
+        <div class="row text-center">
+            <div class="col col-50">
+                <div class="guages">
+                    <span>7</span>
+                </div>
+                <h4>New</h4>
+            </div>
+            <div class="col col-50">
+                <div class="guages">
+                    <span>34</span>
+                </div>
+                <h4>Upates</h4>
+            </div>
+        </div>
+
+        <div class="spacer3"></div>
+        <!--progress bar-->
+        <progress max="200" value="170" data-value="170 / 200 Patient" ></progress>
+
+        <div class="text-right">
+            Pro | <a ui-sref="doctorProfile">Update</a>
+        </div>
+        <div class="spacer3"></div>
+        <ion-list>
+
+            <a class="item item-icon-left" href="#">
+                <i class="icon icon ion-medkit"></i>
+                Medicine
+                <span class="item-note">
+                    15
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-radio-waves"></i>
+                lab/ray
+                <span class="item-note">
+                    3
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-thermometer"></i>
+                examnations
+                <span class="item-note">
+                    7
+                </span>
+            </a>
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-clipboard"></i>
+                Others
+                <span class="item-note">
+                    6
+                </span>
+            </a>
+            <!--<a class="item item-icon-left" href="#">
+                <i class="icon"><img src="img/4.png" style="width: 30px;"></i>
+                Others
+                <span class="item-note">
+                    6
+                </span>
+            </a>-->
+
+        </ion-list>
+        <div class="spacer1"></div>
+
+    </ion-content>
+</ion-view>

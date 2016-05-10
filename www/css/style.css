@@ -1,0 +1,300 @@
+﻿/*general*/
+.platform-ios .manual-ios-statusbar-padding {
+    padding-top: 20px;
+}
+
+.manual-remove-top-padding {
+    padding-top: 0px;
+}
+
+    .manual-remove-top-padding .scroll {
+        padding-top: 0px !important;
+    }
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.spnValidationPadding {
+    padding-bottom: 15px;
+}
+
+.bar-footer {
+    padding: 0;
+}
+
+    .bar-footer .button {
+        border-radius: 0px !important;
+    }
+
+        .bar-footer .button span {
+                font-size: 17px;
+        }
+
+    .bar-footer .button-stable {
+        background-color: #DCDCDC !important;
+        border: 1px solid #CCC !important;
+    }
+
+    .Zebra_DatePicker_Icon{
+        padding-left:calc(100% + 16px) !important;
+    }
+
+.globalBtn {
+    text-indent: 8px;
+}
+
+    .globalBtn img {
+        float: left;
+        width: 36px;
+        border-radius: 50%;
+    }
+
+.logoImg {
+    width: 40%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.circle {
+    width: 65%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.spacer1 {
+    height: 60px;
+    display: block;
+}
+
+.spacer2 {
+    height: 30px;
+    display: block;
+}
+
+.spacer3 {
+    height: 15px;
+    display: block;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    height: 20px;
+}
+
+/*progrss text*/
+progress[data-value]:before {
+    content: attr(data-value);
+    position: absolute;
+    right: 0;
+    left: attr(value px, auto);
+    top: -125%;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+    background-image: -webkit-linear-gradient(-45deg, transparent 33%, rgba(0, 0, 0, .1) 33%, rgba(0,0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25)), -webkit-linear-gradient(left, #09c, #f44);
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+.guages {
+    position: relative;
+    font-size: 50px;
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    margin: 10px;
+    background-color: #387EF5;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+    .guages:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: block;
+        content: " ";
+        border-radius: 50%;
+        background-color: #f5f5f5;
+        width: 95px;
+        height: 95px;
+    }
+
+    .guages span {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        line-height: 2.3;
+        color: #aaa;
+        display: block;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+/*post Popup Modal*/
+.postPopupModal {
+    width: 80%;
+    height: auto;
+    min-height: 0;
+    top: 20%;
+    left: 10%;
+    right: 10%;
+    bottom: 20%;
+}
+
+    .postPopupModal .title {
+        right: initial;
+    }
+
+    .postPopupModal .closeIcon {
+        right: 10px;
+        position: fixed;
+    }
+
+        .postPopupModal .closeIcon:before {
+            font-size: 12px;
+        }
+
+    .postPopupModal .bar-header i {
+        padding-left: 0px;
+    }
+
+    .postPopupModal .attachmentIcon:before {
+        font-size: 24px;
+    }
+
+    .postPopupModal .bar-footer {
+        padding: 5px;
+        border-color: #b2b2b2 !important;
+        background-color: #f8f8f8 !important;
+        background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%) !important;
+    }
+
+        .postPopupModal .bar-footer .button {
+            border: 1px solid #aaa;
+        }
+
+.modal-backdrop.active {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spinner svg {
+    width: 40px;
+    height: 40px;
+    stroke: yellowgreen;
+}
+
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+}
+
+    .flip-container.flip .flipper {
+        -webkit-transform: rotateY(-180deg);
+        -moz-transform: rotateY(-180deg);
+        -o-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+    }
+
+.flip-container, .front, .back {
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -o-transition: 0.6s;
+    -ms-transition: 0.6s;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    position: relative;
+}
+/* hide back of pane during swap */
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+/* back, initially hidden pane */
+.back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+/*******************************************************************************************/
+
+/*allpatients Page*/
+.allpatientsPage .item h2 {
+    margin-top: 30px !important;
+    font-size: 18px !important;
+}
+
+/*viewPatient Page*/
+.viewPatientPage .dvUserData h2 {
+    font-size: 28px;
+}
+
+
+/*login page*/
+.errorMsgContainer {
+    position: absolute;
+    left: 10px;
+    bottom: 1px;
+    color: red;
+}
+
+/*dashboard Page*/
+.dashboardPage .buttonGray {
+    background-color: #ddd;
+    border-color: #ccc;
+}
+
+/*sms Loader*/
+.smsLoader a {
+    color: gray;
+}

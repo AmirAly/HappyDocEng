@@ -1,0 +1,32 @@
+<ion-view title="Login" hide-nav-bar="true" >
+    <ion-content padding="true" class="manual-ios-statusbar-padding">
+        <div>
+            <img src="img/logo.png" class="logoImg">
+        </div>
+        <h4 class="text-center">Welcom To Doctor App !</h4>
+        
+        <form name="frmLogin" ng-submit="submitForm(frmLogin)">
+                <ion-list class="list listInputs padding">
+                    <label class="item item-input padding">
+                        <span class="input-label spnValidationPadding">Email</span>
+                        <input ng-model="name" type="email" required placeholder="Email" name="userName" id="userName" autocorrect="off" autocapitalize="off">
+                        <span ng-show="frmLogin.userName.$touched  && frmLogin.userName.$invalid" class="errorMsgContainer">
+                            <span class="errorFont" ng-show="frmLogin.userName.$error.required">required</span>
+                            <span class="errorFont" ng-show="frmLogin.userName.$error.email">invalid email</span>
+                        </span>
+                    </label>
+                    <label class="item item-input padding">
+                        <span class="input-label spnValidationPadding">Password</span>
+                        <input ng-model="password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
+                        <span ng-show="frmLogin.txtPassword.$touched && frmLogin.txtPassword.$invalid" class="errorMsgContainer">
+                            <span class="errorFont" ng-show="frmLogin.txtPassword.$error.required">required</span>
+                        </span>
+                    </label>
+                </ion-list>
+                <button class="button button-calm actionBlue button-block" ng-disabled="frmLogin.$invalid" type="submit"><span>&nbsp;Login</span></button>
+        </form>
+        <a ui-sref="dashboard" class="button button-positive ion-social-facebook button-block"><span>&nbsp;Facebook Login</span></a>
+        <a ui-sref="register" class="button button-positive  button-block button-clear">Don't have an account ?</a>
+        <div class="spacer2"></div>
+    </ion-content>
+</ion-view>
