@@ -26,52 +26,25 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // =======================
-// routes ================
+// API ROUTES ============
 // =======================
-app.get('/setup', function (req, res) {
-
-    // create a sample user
-    var sampleuser = new User({
-        name: 'Nick Cerminara',
-        password: 'password',
-        admin: true
-    });
-
-    // save the sample user
-    sampleuser.save(function (err) {
-        if (err) throw err;
-
-        console.log('User saved successfully');
-        res.json({ success: true });
-    });
-});
-
-
-// basic route (http://localhost:8080)
-app.get('/', function (req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
-
-
-
-// API ROUTES -------------------
+// NOTE : ORDER IS VERY IMPORANT !!
 
 // get an instance of the router for api routes
 var apiRoutes = express.Router();
 
-// route to authenticate a user (POST http://localhost:8080/api/authenticate)
-apiRoutes.post('/authenticate', function (req, res) {
-
+// route to authenticate a user (POST http://localhost:8080/api/user/login)
+apiRoutes.post('/user/login', function (req, res) {
     // find the user
-    User.findOne({ name: req.body.name }, function (err, user) {
+    User.findOne({ email: req.body.email }, function (err, user) {
         if (err) throw err;
         if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
+            res.json({ type: '0', message: 'Login failed. User not found.' });
         }
         else if (user) {
             // check if password matches
             if (user.password != req.body.password) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.json({ type: '1', message: 'Login failed. Wrong password.' });
             }
             else {
                 // if user is found and password is right
@@ -82,56 +55,88 @@ apiRoutes.post('/authenticate', function (req, res) {
 
                 // return the information including token as JSON
                 res.json({
-                    success: true,
-                    message: 'Enjoy your token!',
-                    token: token
+                    type: '100',
+                    message: 'Login passed , Enjoy your token!',
+                    data: token
                 });
             }
         }
     });
 });
 
-// TODO: route middleware to verify a token
-// route middleware to verify a token
-apiRoutes.use(function (req, res, next) {
-    // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    // decode token
-    if (token) {
-        // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function (err, decoded) {
-            if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
-            } else {
-                // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
-                next();
-            }
-        });
-    }
-    else {
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-    }
+// route to register a user (POST http://localhost:8080/api/user/register)
+apiRoutes.post('/user/register', function (req, res) {
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) throw err;
+        // if user already exist
+        if (user) {
+            res.json({ type: '0', message: 'User already exist !' });
+        }
+        else {
+            // save data to new user
+            var newuser = new User({
+                email: req.body.email,
+                password: req.body.password,
+                img: 'default img'
+            });
+
+            // save the sample user
+            newuser.save(function (err) {
+                if (err) throw err;
+                console.log('User saved successfully');
+
+            });
+
+            // create a token
+            var token = jwt.sign(newuser, app.get('superSecret'), {
+                expiresIn: 86400 // expires in 24 hours
+            });
+            res.json({ type: '100', message: 'user added sucssesfully', date: newuser, token: token });
+        }
+    })
 });
 
 
+//// route middleware to verify a token
+//apiRoutes.use(function (req, res, next) {
+//    // check header or url parameters or post parameters for token
+//    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+//    // decode token
+//    if (token) {
+//        // verifies secret and checks exp
+//        jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+//            if (err) {
+//                return res.json({ success: false, message: 'Failed to authenticate token.' });
+//            } else {
+//                // if everything is good, save to request for use in other routes
+//                req.decoded = decoded;
+//                next();
+//            }
+//        });
+//    }
+//    else {
+//        // if there is no token
+//        // return an error
+//        return res.status(403).send({
+//            success: false,
+//            message: 'No token provided.'
+//        });
+//    }
+//});
 
-// route to show a random message (GET http://localhost:8080/api/)
-apiRoutes.get('/', function (req, res) {
-    res.json({ message: 'Welcome to the coolest API on earth!' });
-});
 
-// route to return all users (GET http://localhost:8080/api/users)
-apiRoutes.get('/users', function (req, res) {
-    User.find({}, function (err, users) {
-        res.json({ 'users': users, 'decoded_token': req.decoded._doc });
-    });
-});
+
+//// route to show a random message (GET http://localhost:8080/api/)
+//apiRoutes.get('/', function (req, res) {
+//    res.json({ message: 'Welcome to the coolest API on earth!' });
+//});
+
+//// route to return all users (GET http://localhost:8080/api/users)
+//apiRoutes.get('/users', function (req, res) {
+//    User.find({}, function (err, users) {
+//        res.json({ 'users': users, 'decoded_token': req.decoded._doc });
+//    });
+//});
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);
