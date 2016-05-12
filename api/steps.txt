@@ -1,0 +1,57 @@
+1- create folder structure 
+
+- app/
+----- models/
+---------- user.js
+- config.js
+- package.json
+- server.js
+
+
+
+2- set up our package.json
+
+{
+  "name": "happy-doctor-jwt",
+  "main": "server.js"
+}
+
+
+3- install packages
+
+$ npm install express body-parser morgan mongoose jsonwebtoken --save
+// this will automatically write into package.json file.
+
+
+
+4- (first use only )Install nodemon using npm install -g nodemon 
+&& start using nodemon server.js
+// to have your server restart on file changes
+
+5- create a Mongoose model, ---> app/models/user.js
+
+6- fill CONFIG.JS
+// you will need to create MongoDB database to be able to get a URI string to use as your database configuration
+
+module.exports = {
+    'secret': 'ilovescotchyscotch',
+    'database': 'mongodb://noder:noderauth&54;proximus.modulusmongo.net:27017/so9pojyN'
+     // OR
+         'database': 'mongodb://localhost:27017/myproject'
+};
+
+
+7- The Actual Node Application (server.js)
+ - Grab All the Packages we installed earlier (express, body-parser, morgan, mongoose, and jsonwebtoken) && the model and config 
+ - set our variables, configure our packages, and connect to our database
+ - Create Basic Routes (http://localhost:8080) , (http://localhost:8080/setup)
+ - Create API Routes (POST http://localhost:8080/api/authenticate),
+                     (GET http://localhost:8080/api),
+                     (GET http://localhost:8080/api/users)
+
+8- run mongod.exe
+
+9- nodemon server.js
+
+
+
