@@ -60,11 +60,10 @@ apiRoutes.post('/user/login', function (req, res) {
                 var token = jwt.sign({ email: user.email }, app.get('superSecret'), {
                     expiresIn: 86400 // expires in 24 hours
                 });
-                console.log(user);
                 // return the information including token as JSON
                 res.json({
                     code: '100',
-                    message: 'Login passed , Enjoy your token!',
+                    message: 'Login succeed',
                     date: user,
                     token: token
                 });
@@ -143,12 +142,78 @@ apiRoutes.get('/', function (req, res) {
     res.json({ code: '100', message: 'Welcome to the coolest API on earth!', data: req.decoded });
 });
 
-//// route to return all doctors (GET http://localhost:8080/api/users)
+// route to return all doctors (GET http://localhost:8080/api/users)
 apiRoutes.get('/users', function (req, res) {
     User.find({}, function (err, users) {
-        res.json({ 'users': users, 'decoded_token': req.decoded._doc });
+        res.json({ 'users': users, 'decoded_token': req.decoded });
     });
 });
+
+// route to return doctor data (GET http://localhost:8080/api/user/getprofile)
+apiRoutes.get('/user/getprofile', function (req, res) {
+    User.findOne({ _id: req.query._id }, function (err, user) {
+        // user found
+        if (user) {
+            res.json({ code: '100', message: 'User found', data: user });
+        }
+        //user not found
+        else {
+            res.json({ code: '0', message: 'User not found' });
+        }
+    });
+});
+
+
+// route to update doctor data (GET http://localhost:8080/api/user/updateprofile)
+apiRoutes.put('/user/updateprofile', function (req, res) {
+    User.findOne({ _id: req.query._id }, function (err, user) {
+        // user found
+        if (user) {
+            // save new data to the user
+            if (req.body.email) {
+                // he sent his email again
+                if (user.email == req.body.email) {
+                    user.email = req.body.email;
+                }
+                // else (new email) search for email duplication
+                else {
+                    User.findOne({ email: req.body.email }, function (error, userfound) {
+                        if (userfound) {
+                            res.json({ code: '2', message: 'This Email already exist.'});
+                        }
+                        else {
+                            user.email = req.body.email;
+                        }
+                    });
+                }
+                user.email = req.body.email;
+            }
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+            if (req.body.name) {
+                user.name = req.body.name;
+            }
+            if (req.body.img) {
+                user.img = req.body.img;
+            }
+
+            // save the user to db
+            user.save(function (err) {
+                if (err) throw err;
+                console.log('User saved successfully');
+                res.json({ code: '100', message: 'User updated', data: user });
+            });
+             
+        }
+            //user not found
+        else {
+            res.json({ code: '0', message: 'User not found' });
+        }
+    });
+});
+
+
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);
