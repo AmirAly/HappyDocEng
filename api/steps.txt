@@ -49,7 +49,7 @@ module.exports = {
                      (GET http://localhost:8080/api),
                      (GET http://localhost:8080/api/users)
 
-8- run mongod.exe
+8- run mongod.exe ||| to repair run mongod --repair then mongod.exe
 
 9- nodemon server.js
 
