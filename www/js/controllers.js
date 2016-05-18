@@ -1,13 +1,14 @@
 angular.module('app.controllers', [])
 
-.controller('loginCtrl', function ($scope, $state, DoctorsFactory) {
-    DoctorsFactory.getDoctors(function (data) {
-        console.log(data.users[6]);
-        //$scope.Doctors = data.users[6];
-        //$scope.email = data.users[6].email;
-        //$scope.password = data.users[6].password;
+.controller('loginCtrl', function ($scope, $state, API) {
+    var req = {
+        method: 'PUT',
+        url: '/api/user/updateprofile?_id=57347b162cd13790103d7b07',
+        data: { email: 'amr@alo.co' }
+    }
+    API.execute(req,true).then(function (_res) {
+        console.log(_res);
     });
-
     $scope.submitForm = function (form) {
         if (form.$valid) {
             $state.go('dashboard');

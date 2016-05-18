@@ -23,8 +23,8 @@ app.set('superSecret', config.secret);   // secret variable
 // allow headers
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin,Authorization ,X-Requested-With, Content-Type, Accept");
     next();
 });
 
@@ -46,6 +46,36 @@ app.get('/', function (req, res) {
 app.get('/doctors', function (req, res) {
     User.find({}, function (err, users) {
         res.json({code:'100', 'users': users});
+    });
+});
+// route to authenticate a user (POST http://localhost:8080/user/logintest)
+app.post('/user/logintest', function (req, res) {
+    // find the user
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) throw err;
+        if (!user) {
+            res.json({ code: '0', message: 'Login failed. User not found.' });
+        }
+        else if (user) {
+            // check if password matches
+            if (user.password != req.body.password) {
+                res.json({ code: '1', message: 'Login failed. Wrong password.' });
+            }
+            else {
+                // if user is found and password is right
+                // create a token
+                var token = jwt.sign({ email: user.email }, app.get('superSecret'), {
+                    expiresIn: 86400 // expires in 24 hours
+                });
+                // return the information including token as JSON
+                res.json({
+                    code: '100',
+                    message: 'Login succeed',
+                    date: user,
+                    token: token
+                });
+            }
+        }
     });
 });
 // =======================
@@ -125,8 +155,13 @@ apiRoutes.post('/user/register', function (req, res) {
 
 // route middleware to verify a token
 apiRoutes.use(function (req, res, next) {
+
+    // work around to solve option issue !!!
+    if (req.method.toLowerCase().indexOf('option') > -1)
+        return res.status(200).send({ code: '100', message: 'Option escape' });
+
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var token = req.body.Auth;
     // decode token 
     if (token) {
         // verifies secret and checks exp
@@ -144,7 +179,7 @@ apiRoutes.use(function (req, res, next) {
     // if there is no token
     else {
         // return an error
-        return res.status(403).send({ code: '1', message: 'No token provided.' });
+        return res.status(401).send({ code: '1', message: 'No token provided.' });
         //return res.json({ code: '1',  message: 'No token provided.' });
     }
 });
