@@ -19,6 +19,16 @@ var port = process.env.PORT || 8080;     // used to create, sign, and verify tok
 mongoose.connect(config.database);       // connect to database
 app.set('superSecret', config.secret);   // secret variable
 
+// to solve XMLHttpRequest && No 'Access-Control-Allow-Origin' 
+// allow headers
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -31,6 +41,13 @@ app.get('/', function (req, res) {
     res.json({ message: 'Welcome to the 8080 app /, use /api/function' });
 });
 
+// test route
+// route to return all doctors (GET http://localhost:8080/doctors)
+app.get('/doctors', function (req, res) {
+    User.find({}, function (err, users) {
+        res.json({code:'100', 'users': users});
+    });
+});
 // =======================
 // API ROUTES ============
 // =======================
@@ -162,7 +179,6 @@ apiRoutes.get('/user/getprofile', function (req, res) {
         }
     });
 });
-
 
 // route to update doctor data (GET http://localhost:8080/api/user/updateprofile)
 apiRoutes.put('/user/updateprofile', function (req, res) {

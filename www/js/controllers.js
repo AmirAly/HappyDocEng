@@ -1,6 +1,13 @@
 angular.module('app.controllers', [])
 
-.controller('loginCtrl', function ($scope, $state) {
+.controller('loginCtrl', function ($scope, $state, DoctorsFactory) {
+    DoctorsFactory.getDoctors(function (data) {
+        console.log(data.users[6]);
+        //$scope.Doctors = data.users[6];
+        //$scope.email = data.users[6].email;
+        //$scope.password = data.users[6].password;
+    });
+
     $scope.submitForm = function (form) {
         if (form.$valid) {
             $state.go('dashboard');
@@ -85,7 +92,7 @@ angular.module('app.controllers', [])
     }
 })
 
-.controller('patientCtrl', function ($scope,$state) {
+.controller('patientCtrl', function ($scope, $state) {
     $scope.active = 1;
     $scope.setActive = function (type) {
         console.log(type);
@@ -109,12 +116,12 @@ angular.module('app.controllers', [])
     $scope.phoneNumber = '02465476587';
     //Show a backdrop for one second
     $scope.action = function () {
-            $ionicLoading.show({
-                scope: $scope,
-                templateUrl: 'templates/smsloader.html',
-                animation: 'slide-in-up'
-            });
-        
+        $ionicLoading.show({
+            scope: $scope,
+            templateUrl: 'templates/smsloader.html',
+            animation: 'slide-in-up'
+        });
+
         $timeout(function () {
             $ionicLoading.hide();
         }, 5000);
@@ -133,3 +140,4 @@ angular.module('app.controllers', [])
         }
     }
 })
+;
