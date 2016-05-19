@@ -41,43 +41,14 @@ app.get('/', function (req, res) {
     res.json({ message: 'Welcome to the 8080 app /, use /api/function' });
 });
 
-// test route
+// test routes
 // route to return all doctors (GET http://localhost:8080/doctors)
 app.get('/doctors', function (req, res) {
     User.find({}, function (err, users) {
         res.json({code:'100', 'users': users});
     });
 });
-// route to authenticate a user (POST http://localhost:8080/user/logintest)
-app.post('/user/logintest', function (req, res) {
-    // find the user
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) throw err;
-        if (!user) {
-            res.json({ code: '0', message: 'Login failed. User not found.' });
-        }
-        else if (user) {
-            // check if password matches
-            if (user.password != req.body.password) {
-                res.json({ code: '1', message: 'Login failed. Wrong password.' });
-            }
-            else {
-                // if user is found and password is right
-                // create a token
-                var token = jwt.sign({ email: user.email }, app.get('superSecret'), {
-                    expiresIn: 86400 // expires in 24 hours
-                });
-                // return the information including token as JSON
-                res.json({
-                    code: '100',
-                    message: 'Login succeed',
-                    date: user,
-                    token: token
-                });
-            }
-        }
-    });
-});
+
 // =======================
 // API ROUTES ============
 // =======================
@@ -111,7 +82,7 @@ apiRoutes.post('/user/login', function (req, res) {
                 res.json({
                     code: '100',
                     message: 'Login succeed',
-                    date: user,
+                    data: user,
                     token: token
                 });
             }
@@ -132,7 +103,7 @@ apiRoutes.post('/user/register', function (req, res) {
             var newuser = new User({
                 email: req.body.email,
                 password: req.body.password,
-                img: 'default img'
+                img: 'img/unknown.png'
             });
             // save the sample user
             newuser.save(function (err) {
@@ -156,6 +127,9 @@ apiRoutes.post('/user/register', function (req, res) {
 // route middleware to verify a token
 apiRoutes.use(function (req, res, next) {
 
+    console.log(req._parsedUrl.query);
+    console.log(req._parsedUrl.body);
+    console.log(req);
     // work around to solve option issue !!!
     if (req.method.toLowerCase().indexOf('option') > -1)
         return res.status(200).send({ code: '100', message: 'Option escape' });

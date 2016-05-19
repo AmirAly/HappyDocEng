@@ -1,31 +1,63 @@
 angular.module('app.controllers', [])
 
-.controller('loginCtrl', function ($scope, $state, API) {
-    var req = {
-        method: 'PUT',
-        url: '/api/user/updateprofile?_id=57347b162cd13790103d7b07',
-        data: { email: 'amr@alo.co' }
-    }
-    API.execute(req,true).then(function (_res) {
-        console.log(_res);
-    });
+.controller('loginCtrl', function ($scope, $state, API, $window) {
+
+
     $scope.submitForm = function (form) {
         if (form.$valid) {
-            $state.go('dashboard');
+            console.debug(form.name);
+            console.debug(form.password);
+            var req = {
+                method: 'POST',
+                url: '/api/user/login',
+                data: { email: form.name, password: form.password }
+            }
+            API.execute(req, false).then(function (_res) {
+                if (_res.data.code == 100) {
+                    console.log(_res.data);
+                    $window.localStorage['authenticationToken'] = _res.data.token;
+                    $window.localStorage['userId'] = _res.data.data._id;
+                    $state.go('dashboard');
+                }
+                else {
+                    console.log(_res.data.message);
+                }
+            });
+
         }
     }
 })
 
-.controller('registerCtrl', function ($scope, $state) {
+.controller('registerCtrl', function ($scope, $state, API, $window) {
+
     $scope.submitForm = function (form) {
         if (form.$valid) {
-            $state.go('dashboard');
+            console.debug(form.name);
+            console.debug(form.password);
+            var req = {
+                method: 'POST',
+                url: '/api/user/register',
+                data: { email: form.name, password: form.password }
+            }
+            API.execute(req, false).then(function (_res) {
+                if (_res.data.code == 100) {
+                    console.log(_res.data);
+                    $window.localStorage['authenticationToken'] = _res.data.token;
+                    $window.localStorage['userId'] = _res.data.data._id;
+                    $state.go('dashboard');
+                }
+                else {
+                    console.log(_res.data.message);
+                }
+            });
+
         }
     }
 })
 
-.controller('dashboardCtrl', function ($scope) {
-
+.controller('dashboardCtrl', function ($scope, $window) {
+    console.log($window.localStorage['authenticationToken']);
+    console.log($window.localStorage['userId']);
 })
 
 .controller('allPatientsCtrl', function ($scope) {
@@ -113,8 +145,35 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('doctorProfileCtrl', function ($scope, $ionicLoading, $timeout) {
-    $scope.phoneNumber = '02465476587';
+.controller('doctorProfileCtrl', function ($scope, $ionicLoading, $timeout, API, $window) {
+    $scope.formData = {};
+    //temp fixed data
+    $scope.formData.phoneNumber = '02465476587';
+
+    //console.log($window.localStorage['authenticationToken']);
+    //console.log($window.localStorage['userId']);
+
+    //load profile data
+    var req = {
+        method: 'GET',
+        url: '/api/user/getprofile?_id=' + $window.localStorage['userId'],
+        data: {}
+    }
+    API.execute(req, true).then(function (_res) {
+        console.log(_res);
+        if (_res.data.code == 100) {
+            console.log(_res.data);
+            $scope.formData.name = _res.data.data.name;
+            $scope.formData.email = _res.data.data.email;
+            $scope.formData.password = "";
+            $scope.formData.phoneNumber = _res.data.data.phone;
+        }
+
+    });
+
+
+
+
     //Show a backdrop for one second
     $scope.action = function () {
         $ionicLoading.show({
@@ -128,10 +187,30 @@ angular.module('app.controllers', [])
         }, 5000);
     };
 
-
     $scope.submitFormData = function (form) {
         if (form.$valid) {
-            console.log('submit');
+            console.log($scope.formData.name);
+            console.log($scope.formData.email);
+            console.log($scope.formData.password);
+
+            // for update profile 
+            var req = {
+                method: 'PUT',
+                url: '/api/user/updateprofile?_id=' + $window.localStorage['userId'],
+                data: { email: $scope.formData.email, name: $scope.formData.name, password: $scope.formData.password }
+            }
+            API.execute(req, true).then(function (_res) {
+                console.log(_res);
+                if (_res.data.code == 100) {
+                    console.log(_res.data);
+                }
+                else {
+                    console.log(_res.data.message);
+                }
+
+            });
+
+
         }
     }
 

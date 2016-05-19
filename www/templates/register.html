@@ -9,7 +9,7 @@
             <ion-list class="list listInputs padding">
                 <label class="item item-input padding">
                     <span class="input-label spnValidationPadding">Email</span>
-                    <input ng-model="name" type="email" required placeholder="Email" name="userName" id="userName" autocorrect="off" autocapitalize="off">
+                    <input data-ng-model="frmRegister.name" type="email" required placeholder="Email" name="userName" id="userName" autocorrect="off" autocapitalize="off">
                     <span ng-show="frmRegister.userName.$touched  && frmRegister.userName.$invalid" class="errorMsgContainer">
                         <span class="errorFont" ng-show="frmRegister.userName.$error.required">required</span>
                         <span class="errorFont" ng-show="frmRegister.userName.$error.email">invalid email</span>
@@ -17,7 +17,7 @@
                 </label>
                 <label class="item item-input padding">
                     <span class="input-label spnValidationPadding">Password</span>
-                    <input ng-model="password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
+                    <input data-ng-model="frmRegister.password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
                     <span ng-show="frmRegister.txtPassword.$touched && frmRegister.txtPassword.$invalid" class="errorMsgContainer">
                         <span class="errorFont" ng-show="frmRegister.txtPassword.$error.required">required</span>
                     </span>

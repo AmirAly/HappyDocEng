@@ -4,17 +4,17 @@
         <div>
             <img src="img/unknown.png" class="circle">
         </div>
-        <form class="list" name="frmDrData" ng-submit="submitFormData(frmDrData)">
-            <label class="item item-input" >
+        <form class="list" name="frmDrData" novalidate ng-submit="submitFormData(frmDrData)">
+            <label class="item item-input">
                 <span class="input-label spnValidationPadding">Name</span>
-                <input type="text" placeholder="Name" name="txtName" required ng-model="name">
+                <input type="text" placeholder="Name" name="txtName" required ng-model="formData.name">
                 <span ng-show="frmDrData.txtName.$touched && frmDrData.txtName.$invalid" class="errorMsgContainer">
                     <span class="errorFont" ng-show="frmDrData.txtName.$error.required">required</span>
                 </span>
             </label>
             <label class="item item-input">
                 <span class="input-label spnValidationPadding">Email</span>
-                <input type="email" placeholder="Email" name="txtEmail" required ng-model="email">
+                <input type="email" placeholder="Email" name="txtEmail" required ng-model="formData.email">
                 <span ng-show="frmDrData.txtEmail.$touched  && frmDrData.txtEmail.$invalid" class="errorMsgContainer">
                     <span class="errorFont" ng-show="frmDrData.txtEmail.$error.required">required</span>
                     <span class="errorFont" ng-show="frmDrData.txtEmail.$error.email">invalid email</span>
@@ -22,7 +22,7 @@
             </label>
             <label class="item item-input">
                 <span class="input-label spnValidationPadding">Password</span>
-                <input type="password" placeholder="Password" name="txtPassword" required ng-model="password">
+                <input type="password" placeholder="Password" name="txtPassword" required ng-model="formData.password">
                 <span ng-show="frmDrData.txtPassword.$touched && frmDrData.txtPassword.$invalid" class="errorMsgContainer">
                     <span class="errorFont" ng-show="frmDrData.txtPassword.$error.required">required</span>
                 </span>
@@ -36,7 +36,7 @@
 
             <label class="item item-input" >
                 <span class="input-label spnValidationPadding">Phone</span>
-                <input type="text" placeholder="Phone" name="txtPhone" required ng-model="phoneNumber">
+                <input type="text" placeholder="Phone" name="txtPhone" required ng-model="formData.phoneNumber">
                 <span ng-show="frmPhoneNumber.txtPhone.$touched && frmPhoneNumber.txtPhone.$invalid" class="errorMsgContainer">
                     <span class="errorFont" ng-show="frmPhoneNumber.txtPhone.$error.required">required</span>
                 </span>
