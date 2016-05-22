@@ -24,7 +24,7 @@ app.set('superSecret', config.secret);   // secret variable
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE');
-    res.header("Access-Control-Allow-Headers", "Origin,Authorization ,X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin,Authorization ,X-Requested-With, Content-Type, Accept,authentication");
     next();
 });
 
@@ -126,16 +126,13 @@ apiRoutes.post('/user/register', function (req, res) {
 
 // route middleware to verify a token
 apiRoutes.use(function (req, res, next) {
-
-    console.log(req._parsedUrl.query);
-    console.log(req._parsedUrl.body);
-    console.log(req);
     // work around to solve option issue !!!
     if (req.method.toLowerCase().indexOf('option') > -1)
         return res.status(200).send({ code: '100', message: 'Option escape' });
 
     // check header or url parameters or post parameters for token
-    var token = req.body.Auth;
+    var token = req.headers['authentication'];
+    console.log(token);
     // decode token 
     if (token) {
         // verifies secret and checks exp

@@ -157,8 +157,8 @@ angular.module('app.controllers', [])
     var req = {
         method: 'GET',
         url: '/api/user/getprofile?_id=' + $window.localStorage['userId'],
-        data: {}
-    }
+        data: {},
+        }
     API.execute(req, true).then(function (_res) {
         console.log(_res);
         if (_res.data.code == 100) {
