@@ -114,7 +114,7 @@ apiRoutes.post('/user/register', function (req, res) {
             var token = jwt.sign({ email: newuser.email }, app.get('superSecret'), {
                 expiresIn: 86400 // expires in 24 hours
             });
-            res.json({ code: '100', message: 'user added sucssesfully', date: newuser, token: token });
+            res.json({ code: '100', message: 'user added sucssesfully', data: newuser, token: token });
         }
     });
 });
@@ -191,6 +191,11 @@ apiRoutes.put('/user/updateprofile', function (req, res) {
     User.findOne({ _id: req.query._id }, function (err, user) {
         // user found
         if (user) {
+            // check if password matches
+            if (user.password != req.body.password) {
+                res.json({ code: '1', message: 'Update failed. Wrong password.' });
+            }
+            else {
             // save new data to the user
             if (req.body.email) {
                 // he sent his email again
@@ -219,7 +224,6 @@ apiRoutes.put('/user/updateprofile', function (req, res) {
             if (req.body.img) {
                 user.img = req.body.img;
             }
-
             // save the user to db
             user.save(function (err) {
                 if (err) throw err;
@@ -227,6 +231,7 @@ apiRoutes.put('/user/updateprofile', function (req, res) {
                 res.json({ code: '100', message: 'User updated', data: user });
             });
              
+            }
         }
             //user not found
         else {

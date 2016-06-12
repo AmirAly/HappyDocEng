@@ -32,7 +32,7 @@
     }
 
         .bar-footer .button span {
-                font-size: 17px;
+            font-size: 17px;
         }
 
     .bar-footer .button-stable {
@@ -40,9 +40,9 @@
         border: 1px solid #CCC !important;
     }
 
-    .Zebra_DatePicker_Icon{
-        padding-left:calc(100% + 16px) !important;
-    }
+.Zebra_DatePicker_Icon {
+    padding-left: calc(100% + 16px) !important;
+}
 
 .globalBtn {
     text-indent: 8px;
@@ -279,7 +279,6 @@ progress[value]::-webkit-progress-value {
     font-size: 28px;
 }
 
-
 /*login page*/
 .errorMsgContainer {
     position: absolute;
@@ -287,6 +286,10 @@ progress[value]::-webkit-progress-value {
     bottom: 1px;
     color: red;
 }
+
+    .errorMsgContainer .errorFont {
+        font-size: 14px;
+    }
 
 /*dashboard Page*/
 .dashboardPage .buttonGray {

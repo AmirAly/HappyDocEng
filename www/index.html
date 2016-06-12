@@ -17,7 +17,15 @@
 
     <!--angular--> 
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
+    <script src="js/allpatientcontroller.js"></script>
+    <script src="js/dashboardcontroller.js"></script>
+    <script src="js/doctorprofilecontroller.js"></script>
+    <script src="js/patientcontroller.js"></script>
+    <script src="js/logincontroller.js"></script>
+    <script src="js/registercontroller.js"></script>
+    <script src="js/viewpatientcontroller.js"></script>
+    <script src="js/indexcontroller.js"></script>
+
     <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
@@ -29,14 +37,12 @@
 <body ng-app="app" animation="slide-left-right-ios7">
     <div>
         <div>
-            <ion-nav-bar class="bar-positive">
+            <ion-nav-bar class="bar-positive" ng-controller="indexCtrl">
                 <ion-nav-back-button class="button-icon icon ion-ios-arrow-back"></ion-nav-back-button>
-
                 <ion-nav-buttons side="right">
-
-                    <a ui-sref="doctorProfile" class='globalBtn button button-clear '>
+                    <a ui-sref="doctorProfile" class='globalBtn button button-clear'>
                         <img src="img/5.jpg" />
-                        <i>Amir Aly</i>
+                        <i>{{userName}}</i>
                     </a>
                 </ion-nav-buttons>
             </ion-nav-bar>

@@ -49,9 +49,11 @@ module.exports = {
                      (GET http://localhost:8080/api),
                      (GET http://localhost:8080/api/users)
 
-8- run mongod.exe ||| to repair run mongod --repair then mongod.exe
+8- run mongod.exe ||| to repair run mongod --repair then mongod.exe (mongodb root)
 
-9- nodemon server.js
+9- nodemon server.js (on api root)
+
+10- ionic serve (form ui root)
 
 
 

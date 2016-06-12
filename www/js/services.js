@@ -8,11 +8,6 @@ angular.module('app.services', [])
         execute: function (_req, _isAuth) {
             _req.url = _url + _req.url;
             _req.headers = headers;
-            //if (_isAuth == true) {
-            //    console.log(_req);
-            //    console.log($window.localStorage['authenticationToken']);
-            //    _req.data.Auth = $window.localStorage['authenticationToken'];
-            //}
             return $http(_req);
         }
     };

@@ -14,12 +14,18 @@
                         <span class="errorFont" ng-show="frmRegister.userName.$error.required">required</span>
                         <span class="errorFont" ng-show="frmRegister.userName.$error.email">invalid email</span>
                     </span>
+                    <!--custom error for wrong password-->
+                    <span class="errorMsgContainer">
+                        <span class="errorFont" ng-show="formData.existEmail">This Email already exist !</span>
+                    </span>
+
                 </label>
                 <label class="item item-input padding">
                     <span class="input-label spnValidationPadding">Password</span>
-                    <input data-ng-model="frmRegister.password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
+                    <input minlength="6" data-ng-model="frmRegister.password" type="password" required placeholder="Password" name="txtPassword" id="txtPassword">
                     <span ng-show="frmRegister.txtPassword.$touched && frmRegister.txtPassword.$invalid" class="errorMsgContainer">
                         <span class="errorFont" ng-show="frmRegister.txtPassword.$error.required">required</span>
+                        <span class="errorFont" ng-show="frmRegister.txtPassword.$error.minlength">at least 6 characters long.</span>
                     </span>
                 </label>
             </ion-list>
